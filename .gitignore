@@ -1,0 +1,91 @@
+# .gitignore
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+ENV/
+env/
+
+# Django secret key and environment variables
+.env
+.env.local
+.env.*.local
+
+# Database
+*.sqlite3
+*.db
+
+# Django migrations (except __init__.py)
+# !api/migrations/__init__.py
+
+### Django ###
+# Local development
+*.log
+local_settings.py
+db.sqlite3
+media/
+
+# Static files
+staticfiles/
+
+### Node.js/React ###
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Build files
+build/
+dist/
+.next/
+out/
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Environment variables
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Debug files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage
+coverage/
+
+### IDE ###
+# VS Code
+.vscode/
+!.vscode/settings.json
+
+# JetBrains
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+### Testing ###
+.pytest_cache/
+.mypy_cache/
+
+# SQLite journal files
+*.sqlite-journal
