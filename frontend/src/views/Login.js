@@ -1,7 +1,22 @@
-import React from 'react'
-import { Mail, Lock, ArrowRight } from 'lucide-react';
+import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
+import { Mail, Lock, ArrowRight} from 'lucide-react';
+import AuthContext from '../context/AuthContext'
 
 function Login() {
+  const {loginUser} = useContext(AuthContext)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const email = e.target.email.value
+    const password = e.target.password.value
+
+    email.length > 0 && loginUser(email, password)
+
+    console.log(email)
+    console.log(password)
+  }
+
+
   return (
     <div className="min-h-screen bg-gray-50">
       <main className="container mx-auto min-h-screen flex items-center justify-center px-4 pt-16">
@@ -27,7 +42,7 @@ function Login() {
                   </p>
                 </div>
 
-                <form className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-4">
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -100,9 +115,9 @@ function Login() {
                 <div className="text-center">
                   <p className="text-sm text-gray-600">
                     Don't have an account?{' '}
-                    <a href="#" className="font-medium text-blue-600 hover:text-blue-500">
+                    <Link to="/register" className="font-medium text-blue-600 hover:text-blue-500">
                       Sign up
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </div>
@@ -110,16 +125,6 @@ function Login() {
           </div>
         </div>
       </main>
-
-      <footer className="py-4 text-center text-sm text-gray-600 bg-gray-50">
-        <p>
-          © {new Date().getFullYear()}{' '}
-          <a href="#" className="text-blue-600 hover:text-blue-500">
-            Your Company
-          </a>
-          . All rights reserved.
-        </p>
-      </footer>
     </div>
   )
 }

@@ -9,6 +9,7 @@ import Home from './views/Home'
 import Login from './views/Login'
 import Register from './views/Register'
 import Dashboard from './views/Dashboard'
+import Footer from './views/components/Footer'
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           </Route>
         </Routes>
       </AuthProvider>
+      <Footer />
     </Router>
   )
 }
