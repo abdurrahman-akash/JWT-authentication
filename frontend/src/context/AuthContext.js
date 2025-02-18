@@ -111,9 +111,34 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         if (authTokens) {
-            setUser(jwtDecode(authTokens.access));
+            const decodedToken = jwtDecode(authTokens.access);
+            if (decodedToken.exp * 1000 < Date.now()) {
+                logoutUser();  // Auto logout if expired
+            } else {
+                setUser(decodedToken);
+            }
         }
     }, [authTokens]);
+
+
+    const refreshToken = async () => {
+        const response = await fetch("http://127.0.0.1:8000/api/token/refresh/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ refresh: authTokens?.refresh })
+        });
+    
+        const data = await response.json();
+    
+        if (response.status === 200) {
+            setAuthTokens(data);
+            setUser(jwtDecode(data.access));
+            localStorage.setItem("authTokens", JSON.stringify(data));
+        } else {
+            logoutUser();
+        }
+    };
+    
 
     return (
         <AuthContext.Provider value={{ user, setUser, authTokens, setAuthTokens, loginUser, registerUser, logoutUser }}>
