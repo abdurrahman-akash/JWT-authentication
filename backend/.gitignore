@@ -1,0 +1,19 @@
+# Created by https://www.gitignore.io/api/node,python
+
+# SQLite journal files
+*.sqlite-journal
+*.sqlite3-journal
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.env
+.env
+.venv
+venv/
+ENV/
+env/
+venv.bak/
+env.bak/
