@@ -3,6 +3,7 @@
 # SQLite journal files
 *.sqlite-journal
 *.sqlite3
+db.sqlite3
 
 # Python
 __pycache__/
