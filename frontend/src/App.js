@@ -1,34 +1,28 @@
-import React from 'react'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext'; // Import the AuthProvider
+import PrivateRoute from "./utils/PrivateRoute";
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import PrivateRoute from "./utils/PrivateRoute"
-import { AuthProvider } from './context/AuthContext'
-
-import Navbar from './views/Navbar'
-import Home from './views/Home'
-import Login from './views/Login'
-import Register from './views/Register'
-import Dashboard from './views/Dashboard'
-import Footer from './views/components/Footer'
-
+import Navbar from './views/Navbar';
+import Home from './views/Home';
+import Login from './views/Login';
+import Register from './views/Register';
+import Dashboard from './views/Dashboard';
 
 function App() {
   return (
     <Router>
-      <Navbar />
       <AuthProvider>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route element={<PrivateRoute />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Route>
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         </Routes>
       </AuthProvider>
-      <Footer />
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

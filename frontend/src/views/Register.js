@@ -2,12 +2,25 @@ import React from 'react'
 import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom'
 import { Mail, Lock, ArrowRight } from 'lucide-react';
+import AuthContext from '../context/AuthContext'
 
 function Login() {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
+
+  const {registerUser} = useContext(AuthContext)
+
+  console.log(email);
+  console.log(username);
+  console.log(password);
+  console.log(password2);
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    registerUser(email, username, password, password2)
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -34,7 +47,7 @@ function Login() {
                   </p>
                 </div>
 
-                <form className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-4">
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -52,6 +65,7 @@ function Login() {
                           required
                           className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                           placeholder="Enter your email"
+                          onChange={(e) => setEmail(e.target.value)}
                         />
                       </div>
                     </div>
@@ -72,6 +86,7 @@ function Login() {
                           required
                           className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                           placeholder="Enter your username"
+                          onChange={(e) => setUsername(e.target.value)}
                         />
                       </div>
                     </div>
@@ -92,6 +107,7 @@ function Login() {
                           required
                           className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                           placeholder="Enter your password"
+                          onChange={(e) => setPassword(e.target.value)}
                         />
                       </div>
                     </div>
@@ -112,6 +128,7 @@ function Login() {
                           required
                           className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                           placeholder="Confirm your password"
+                          onChange={(e) => setPassword2(e.target.value)}
                         />
                       </div>
                     </div>
@@ -124,6 +141,7 @@ function Login() {
                         name="remember-me"
                         type="checkbox"
                         className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                        required
                       />
                       <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
                         Accept terms and conditions

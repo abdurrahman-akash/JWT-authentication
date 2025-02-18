@@ -2,9 +2,11 @@ import React from 'react';
 import { Menu } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logoutUser } = useAuth();
 
   return (
     <nav className="bg-gray-900 text-white fixed w-full z-50">
@@ -32,20 +34,22 @@ function Navbar() {
               >
                 Home
               </Link>
-              <>
+              {user ? (
+                <>
                   <Link
                     to="/dashboard"
                     className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
                   >
                     Dashboard
                   </Link>
-                  {/* <button
-                    
+                  <button
+                    onClick={() => logoutUser()}
                     className="px-3 py-2 rounded-md text-sm font-medium bg-red-600 hover:bg-red-700"
                   >
                     Sign Out
-                  </button> */}
+                  </button>
                 </>
+              ) : (
                 <>
                   <Link
                     to="/login"
@@ -60,6 +64,7 @@ function Navbar() {
                     Register
                   </Link>
                 </>
+              )}
             </div>
           </div>
           {/* Mobile menu button */}
@@ -83,20 +88,22 @@ function Navbar() {
           >
             Home
           </Link>
-          <>
+          {user ? (
+            <>
               <Link
                 to="/dashboard"
                 className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700"
               >
                 Dashboard
               </Link>
-              {/* <button
-                onClick={() => signOut()}
+              <button
+                onClick={() => logoutUser()}
                 className="block w-full text-left px-3 py-2 rounded-md text-base font-medium bg-red-600 hover:bg-red-700"
               >
                 Sign Out
-              </button> */}
+              </button>
             </>
+          ) : (
             <>
               <Link
                 to="/login"
@@ -111,6 +118,7 @@ function Navbar() {
                 Register
               </Link>
             </>
+          )}
         </div>
       </div>
     </nav>

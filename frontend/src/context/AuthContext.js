@@ -65,6 +65,8 @@ export const AuthProvider = ({ children }) => {
             body: JSON.stringify({ email, username, password, password2 }),
         });
 
+        const data = await response.json();
+
         if (response.status === 201) {
             navigate("/login");
             Swal.fire({
@@ -77,8 +79,10 @@ export const AuthProvider = ({ children }) => {
                 showConfirmButton: false,
             });
         } else {
+            console.error("Registration failed:", data);
             Swal.fire({
                 title: "Registration failed",
+                text: data.detail || "Please check your input and try again.",
                 icon: "error",
                 toast: true,
                 timer: 6000,
