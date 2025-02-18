@@ -1,8 +1,14 @@
 import React from 'react'
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom'
 import { Mail, Lock, ArrowRight } from 'lucide-react';
 
 function Login() {
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
+
   return (
     <div className="min-h-screen bg-gray-50">
       <main className="container mx-auto min-h-screen flex items-center justify-center px-4 pt-16">
